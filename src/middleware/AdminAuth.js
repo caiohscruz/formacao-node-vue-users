@@ -7,8 +7,7 @@ export default function AdminAuth(to, from, next) {
           Authorization: "Bearer " + localStorage.getItem('token')
         }
       }
-      axios.post(`${process.env.VUE_APP_API}/validate`, {}, req).then(res => {
-        console.log(res);
+      axios.post(`${process.env.VUE_APP_API}/validate`, {}, req).then(() => {
         next();
       }).catch(err => {
         alert(err.response.data);
