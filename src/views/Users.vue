@@ -24,12 +24,33 @@
                             <td>{{user.role | processRole}}</td>
                             <td>
                                 <button class="button is-warning" @click="editUser(user.id)">Editar</button>
-                                <button class="button is-danger" @click="deleteUser(user.id)">Deletar</button>
+                                <button class="button is-danger" @click="openModal(user.id)">Deletar</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                
+                <div :class="{'modal':true, 'is-active': showModal}">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    Atenção
+                                </p>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    Você quer realmente deletar este usuário?
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <a href="#" class="card-footer-item" @click="closeModal()">Cancelar</a>
+                                <a href="#" class="card-footer-item" @click="deleteUser(userToDelete)">Sim, deletar</a>
+                            </footer>
+                        </div>
+                    </div>
+                    <button class="modal-close is-large" aria-label="close" @click="closeModal()"></button>
+                </div>
             </div>
         </div>
     </div>
@@ -41,17 +62,19 @@
     export default {
         data() {
             return {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem('token')
+                },
                 users: [],
                 msgError: '',
+                showModal: false,
+                userToDelete: -1
             }
         },
         created() {
-            var req = {
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem('token')
-                }
-            }
-            axios.get(`${process.env.VUE_APP_API}/users`, req).then(res => {
+            axios.get(`${process.env.VUE_APP_API}/users`, {
+                headers: this.headers
+            }).then(res => {
                 this.users = res.data;
             }).catch(err => {
                 this.msgError = err.response.data;
@@ -64,9 +87,27 @@
             editUser(id) {
                 alert("Editanto o usuário " + id)
             },
-            deleteUser(id) {
-                alert("Deletando o usuário " + id)
+            deleteUser() {
+                axios.delete(`${process.env.VUE_APP_API}/user/${this.userToDelete}`, {
+                    headers: this.headers
+                }).then(res => {
+                    alert(res.data);
+                    this.users = this.users.filter(u => u.id != this.userToDelete);
+                    this.closeModal();
+                }).catch(err => {
+                    alert(err.response.data);
+                    this.closeModal();
+                })
             },
+            openModal(id) {
+                this.showModal = true;
+                this.userToDelete = id;
+                console.log(this.userToDelete)
+            },
+            closeModal() {
+                this.showModal = false;
+                this.userToDelete = -1;
+            }
         },
         filters: {
             processRole: function (value) {
