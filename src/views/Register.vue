@@ -15,6 +15,8 @@
         <input type="password" placeholder="Repita sua senha" id="confirmpassword" class="input"
           v-model="confirmpassword" />
         <br />
+        <p>Se já possui cadastro, <router-link to="/login">clique aqui</router-link></p>
+
         <button class="button is-success" @click="register()">Cadastrar</button>
       </div>
     </div>
@@ -60,7 +62,10 @@
     },
     components: {
       ErrorNotification: () => import('../components/ErrorNotification.vue')
-    }
+    },
+    created(){
+    this.$parent.$data.scope = "out";
+  }
   };
 </script>
 

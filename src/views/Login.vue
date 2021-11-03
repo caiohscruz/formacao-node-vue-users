@@ -11,6 +11,7 @@
         <label for="password">Senha</label>
         <input type="password" placeholder="Informe sua senha" id="password" class="input" v-model="password" />
         <br />
+        <p>Se ainda não possui cadastro, <router-link to="/register">clique aqui</router-link></p>
         <button class="button is-success" @click="login()">Entrar</button>
       </div>
     </div>
@@ -38,8 +39,8 @@
           .then((res) => {
             localStorage.setItem('token', res.data);
             this.$router.push({
-              name: 'Home'
-            });
+              name: 'RestrictArea'
+            },{});
           })
           .catch((err) => {
             this.msgError = err.response.data;
@@ -48,7 +49,10 @@
     },
     components: {
       ErrorNotification: () => import('../components/ErrorNotification.vue'),
-    }
+    },
+    created(){
+    this.$parent.$data.scope = "out";
+  }
   };
 </script>
 
