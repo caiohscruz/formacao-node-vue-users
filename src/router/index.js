@@ -31,6 +31,18 @@ const routes = [{
     component: () => import('../views/Users.vue'),
     beforeEnter: AdminAuth
   },
+  {
+    path: '/admin/users/edit/:id',
+    name: 'UserEdit',
+    component: () => import('../views/UserEdit.vue'),
+    beforeEnter: AdminAuth
+  },
+  {
+    path: '/restrict-area',
+    name: 'RestrictArea',
+    component: () => import('../views/RestrictArea.vue'),
+    beforeEnter: AdminAuth
+  },
 ]
 
 const router = new VueRouter({
