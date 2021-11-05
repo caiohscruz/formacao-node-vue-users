@@ -11,11 +11,6 @@ const routes = [{
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/accessdenied',
-    name: 'AccessDenied',
-    component: () => import('../views/AccessDenied.vue')
-  },
-  {
     path: '/register',
     name: 'Register',
     component: () => import('../views/Register.vue')
