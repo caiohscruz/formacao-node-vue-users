@@ -1,5 +1,15 @@
 <template>
   <div>
-    <h1>Acesso restrito a usuários de nível Administrador</h1>
+    <NavBar />
+
+    <h1>Bem-vindo à sua área restrita</h1>
   </div>
 </template>
+
+<script>
+  export default {
+    components:{
+      NavBar: () => import("../components/NavBarInternal")
+    }
+  }
+</script>

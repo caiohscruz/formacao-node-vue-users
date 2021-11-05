@@ -1,5 +1,7 @@
 <template>
   <div>
+    <NavBar />
+
     <h2>Login</h2>
     <hr />
     <div class="columns is-centered">
@@ -80,6 +82,7 @@ export default {
   },
   components: {
     ErrorNotification: () => import("../components/ErrorNotification.vue"),
+    NavBar: () => import("../components/NavBarExternal.vue")
   },
 };
 </script>

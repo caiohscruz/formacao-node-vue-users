@@ -1,5 +1,7 @@
 <template>
   <div>
+    <NavBar />
+
     <h2>Registro de Usuário</h2>
     <hr />
     <div class="columns is-centered">
@@ -15,7 +17,8 @@
         <input type="password" placeholder="Repita sua senha" id="confirmpassword" class="input"
           v-model="confirmpassword" />
         <br />
-        <p>Se já possui cadastro, <router-link to="/login">clique aqui</router-link></p>
+        <p>Se já possui cadastro, <router-link to="/login">clique aqui</router-link>
+        </p>
 
         <button class="button is-success" @click="register()">Cadastrar</button>
       </div>
@@ -58,15 +61,12 @@
             this.msgError = err.response.data;
           });
       },
-
     },
     components: {
-      ErrorNotification: () => import('../components/ErrorNotification.vue')
+      ErrorNotification: () => import('../components/ErrorNotification.vue'),
+      NavBar: () => import("../components/NavBarExternal.vue")
     },
-    created(){
-    this.$parent.$data.scope = "out";
   }
-  };
 </script>
 
 <style scoped>

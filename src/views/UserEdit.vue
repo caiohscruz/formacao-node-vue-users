@@ -1,5 +1,7 @@
 <template>
     <div>
+        <NavBar />
+
         <h2>Registro de Usuário</h2>
         <hr />
         <div class="columns is-centered">
@@ -38,7 +40,7 @@
                         id: this.id,
                         name: this.name,
                         email: this.email,
-                    },{
+                    }, {
                         headers: this.headers
                     })
                     .then((res) => {
@@ -54,7 +56,9 @@
 
         },
         components: {
-            ErrorNotification: () => import('../components/ErrorNotification.vue')
+            ErrorNotification: () => import('../components/ErrorNotification.vue'),
+            NavBar: () => import("../components/NavBarInternal")
+
         },
         created() {
             axios.get(`${process.env.VUE_APP_API}/user/${this.$route.params.id}`, {
@@ -66,7 +70,7 @@
             }).catch(err => {
                 alert(err.response.data);
                 this.$router.push({
-                    name: "Home"
+                    name: "Users"
                 });
             })
         }

@@ -1,5 +1,7 @@
 <template>
     <div>
+        <NavBar />
+
         <h2>Gerenciamento de Usuários</h2>
         <hr />
         <div class="columns is-centered">
@@ -23,7 +25,8 @@
                             <td>{{user.email}}</td>
                             <td>{{user.role | processRole}}</td>
                             <td>
-                                <router-link :to="{name:'UserEdit', params:{id: user.id}}"><button class="button is-warning">Editar</button></router-link>
+                                <router-link :to="{name:'UserEdit', params:{id: user.id}}"><button
+                                        class="button is-warning">Editar</button></router-link>
                                 <button class="button is-danger" @click="openModal(user.id)">Deletar</button>
                             </td>
                         </tr>
@@ -81,12 +84,10 @@
             })
         },
         components: {
-            ErrorNotification: () => import('../components/ErrorNotification.vue')
+            ErrorNotification: () => import('../components/ErrorNotification.vue'),
+            NavBar: () => import("../components/NavBarInternal")
         },
         methods: {
-            editUser(id) {
-                alert("Editanto o usuário " + id)
-            },
             deleteUser() {
                 axios.delete(`${process.env.VUE_APP_API}/user/${this.userToDelete}`, {
                     headers: this.headers

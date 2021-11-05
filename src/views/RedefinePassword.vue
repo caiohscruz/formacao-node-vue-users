@@ -1,5 +1,7 @@
 <template>
   <div>
+    <NavBar />
+
     <h2>Redefina sua senha</h2>
     <hr />
     <div class="columns is-centered">
