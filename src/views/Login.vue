@@ -57,8 +57,7 @@ export default {
           this.$router.push(
             {
               name: "RestrictArea",
-            },
-            {}
+            }
           );
         })
         .catch((err) => {
@@ -69,7 +68,7 @@ export default {
       if (this.email == "") {
         this.msgError = "Favor, informe um e-mail válido";
       } else {
-        axios.post(`${process.env.VUE_APP_API}/recoverpassword`, {
+        axios.post(`${process.env.VUE_APP_API}/recover-password`, {
           email: this.email,
         }).then(res =>{
           alert(res.data);
@@ -81,9 +80,6 @@ export default {
   },
   components: {
     ErrorNotification: () => import("../components/ErrorNotification.vue"),
-  },
-  created() {
-    this.$parent.$data.scope = "out";
   },
 };
 </script>
