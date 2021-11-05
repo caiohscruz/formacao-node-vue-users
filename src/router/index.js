@@ -43,6 +43,11 @@ const routes = [{
     component: () => import('../views/RestrictArea.vue'),
     beforeEnter: AdminAuth
   },
+  {
+    path: '/redefine-password/:token',
+    name: 'RedefinePassword',
+    component: () => import('../views/RedefinePassword.vue')
+  },
 ]
 
 const router = new VueRouter({
